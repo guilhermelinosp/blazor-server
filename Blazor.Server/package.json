@@ -1,15 +1,21 @@
 {
   "scripts": {
-    "tail:build": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --minify",
-    "tail:watch": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --watch --debug"
+    "tail:build:prod": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --minify --config tailwind.config.js",
+    "tail:build:dev": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --config tailwind.config.js",
+    "tail:watch": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --watch --debug --config tailwind.config.js",
+    "postinstall": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --config tailwind.config.js --minify"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.16",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
-    "postcss-cli": "^11.0.0"
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.16"
+  },
+  "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "cssnano": "^7.0.6"
   }
 }
