@@ -7,7 +7,7 @@ namespace Blazor.Server.Configurations;
 
 public static class ServicesInjections
 {
-    public static async Task AddServicesInjections(this IServiceCollection services)
+    public static async Task AddServicesInjections(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddRazorComponents()
                 .AddInteractiveServerComponents();
