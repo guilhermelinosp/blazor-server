@@ -2,24 +2,40 @@
 <html lang="en">
 
 <head>
+    <!-- Character encoding for proper rendering -->
     <meta charset="utf-8" />
+
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="BlazorWind - A Blazor WebAssembly Application" />
-    <meta property="og:title" content="BlazorWind" />
-    <meta property="og:description" content="BlazorWind - A Blazor WebAssembly Application" />
+
+    <!-- SEO and social sharing meta tags -->
+    <meta name="description" content="Blazor App - A Blazor Server Application" />
+    <meta property="og:title" content="Blazor App" />
+    <meta property="og:description" content="Blazor App - A Blazor Server Application" />
     <meta property="og:image" content="favicon.png" />
-    <title>Blazor</title>
-    
+
+    <!-- Title of the app shown in the browser tab -->
+    <title>Blazor App</title>
+
+    <!-- Favicon for the app -->
     <link rel="icon" href="@Assets["favicon.png"]" />
+
+    <!-- Minified CSS for optimized performance, avoid both app.min.css and app.css if redundant -->
     <link rel="stylesheet" href="@Assets["css/app.min.css"]" />
-    <link rel="stylesheet" href="@Assets["css/app.css"]" />
+
+    <!-- Import map for modern browser support -->
     <ImportMap />
+
+    <!-- Head outlet for Blazor-specific components -->
     <HeadOutlet />
 </head>
 
 <body>
+<!-- This is where the Blazor routing component will load your views -->
 <Routes/>
 
-<script src="@Assets["_framework/blazor.web.js"]"></script></body>
+<!-- Blazor WebAssembly runtime script with defer to improve initial page load -->
+<script src="@Assets["_framework/blazor.web.js"]" defer></script>
+</body>
 
 </html>

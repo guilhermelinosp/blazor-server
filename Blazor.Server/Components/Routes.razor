@@ -1,6 +1,14 @@
 ﻿<Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)"/>
-        <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+        <!-- Render the route view with its route data and default layout -->
+        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
+        
+        <!-- Focus on the first <h1> tag for better accessibility when navigating -->
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
+    
+    <NotFound>
+        <!-- Handle the case where no route matches by rendering a fallback component or page -->
+        <p>Sorry, the page you're looking for does not exist.</p>
+    </NotFound>
 </Router>

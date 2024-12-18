@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Server", "Blazor.Server\Blazor.Server.csproj", "{588C1040-EE1F-4481-9D26-F9888EFC5499}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Application", "Blazor.Application\Blazor.Application.csproj", "{6320916D-40D8-4515-BB6F-5966CEC0B456}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Domain", "Blazor.Domain\Blazor.Domain.csproj", "{9774BEA0-A3A5-4A4C-BA9C-4D6B78849AEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Infrastructure", "Blazor.Infrastructure\Blazor.Infrastructure.csproj", "{0D0D826C-EFC2-4C3E-AB14-98A8F911D767}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{588C1040-EE1F-4481-9D26-F9888EFC5499}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{588C1040-EE1F-4481-9D26-F9888EFC5499}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{588C1040-EE1F-4481-9D26-F9888EFC5499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6320916D-40D8-4515-BB6F-5966CEC0B456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6320916D-40D8-4515-BB6F-5966CEC0B456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6320916D-40D8-4515-BB6F-5966CEC0B456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6320916D-40D8-4515-BB6F-5966CEC0B456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9774BEA0-A3A5-4A4C-BA9C-4D6B78849AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9774BEA0-A3A5-4A4C-BA9C-4D6B78849AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9774BEA0-A3A5-4A4C-BA9C-4D6B78849AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9774BEA0-A3A5-4A4C-BA9C-4D6B78849AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D0D826C-EFC2-4C3E-AB14-98A8F911D767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D0D826C-EFC2-4C3E-AB14-98A8F911D767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D0D826C-EFC2-4C3E-AB14-98A8F911D767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D0D826C-EFC2-4C3E-AB14-98A8F911D767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
