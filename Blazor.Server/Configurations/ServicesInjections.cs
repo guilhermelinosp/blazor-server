@@ -1,29 +1,41 @@
-using Microsoft.AspNetCore.ResponseCompression;
-using Serilog;
+using System.IO.Compression;
 using System.Threading.RateLimiting;
-using Newtonsoft.Json.Serialization;
-
-namespace Blazor.Server.Configurations;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 public static class ServicesInjections
 {
     public static async Task AddServicesInjections(this IServiceCollection services, ConfigurationManager configuration)
     {
-        services.AddRazorComponents()
-                .AddInteractiveServerComponents();
-
         services.AddResponseCompression(options =>
         {
             options.EnableForHttps = true;
             options.Providers.Clear();
             options.Providers.Add<GzipCompressionProvider>();
+            options.Providers.Add<BrotliCompressionProvider>();
             options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
             {
                 "application/octet-stream",
-                "application/javascript",
-                "application/json",
-                "text/css"
+                "application/xml",
+                "application/zip",
+                "application/x-7z-compressed",
+                "text/css",
+                "text/html",
+                "text/plain",
+                "image/svg+xml",
+                "image/png",
+                "image/jpeg"
             });
+        });
+
+        services.Configure<GzipCompressionProviderOptions>(options =>
+        {
+            options.Level = CompressionLevel.Optimal;
+        });
+
+        services.Configure<BrotliCompressionProviderOptions>(options =>
+        {
+            options.Level = CompressionLevel.Optimal;
         });
 
         services.AddServerSideBlazor()
@@ -33,28 +45,15 @@ public static class ServicesInjections
                 options.JSInteropDefaultCallTimeout = TimeSpan.FromSeconds(30);
             });
 
-        services.AddControllers()
-            .AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            });
-
         services.AddControllersWithViews();
         services.AddRazorPages();
 
         services.AddHttpClient();
 
-        services.AddLogging(logging =>
-        {
-            logging.ClearProviders();
-            logging.AddSerilog();
-        });
-
         services.AddAntiforgery(options =>
         {
             options.Cookie.Name = "XSRF-TOKEN";
-            options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+            options.Cookie.SecurePolicy = configuration.GetValue<bool>("IsProduction") ? CookieSecurePolicy.Always : CookieSecurePolicy.None;
             options.Cookie.SameSite = SameSiteMode.Strict;
             options.HeaderName = "XSRF-TOKEN";
         });
@@ -63,14 +62,16 @@ public static class ServicesInjections
 
         services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-        services.AddMemoryCache();
-        services.AddDistributedMemoryCache();
-
+        services.AddMemoryCache(options =>
+        {
+            options.SizeLimit = 1024;
+        });
+        
         services.AddRateLimiter(options =>
         {
             options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(
                 context => RateLimitPartition.GetFixedWindowLimiter(
-                    partitionKey: context.Request.Path.ToString(),
+                    partitionKey: $"{context.Request.Path}:{context.Request.Method}",
                     factory: _ => new FixedWindowRateLimiterOptions
                     {
                         PermitLimit = 100,
@@ -79,6 +80,9 @@ public static class ServicesInjections
                         QueueLimit = 10
                     }));
         });
+
+        services.AddRazorComponents()
+            .AddInteractiveServerComponents();
 
         await Task.CompletedTask;
     }

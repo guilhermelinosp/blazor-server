@@ -1,9 +1,7 @@
 {
   "scripts": {
-    "tail:build:prod": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --minify --config tailwind.config.js",
-    "tail:build:dev": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --config tailwind.config.js",
-    "tail:watch": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --watch --debug --config tailwind.config.js",
-    "postinstall": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --config tailwind.config.js --minify"
+    "build:tailwind": "NODE_ENV=production npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.css --config ./wwwroot/js/tailwind.config.js --minify",
+    "watch:tailwind": "NODE_ENV=development npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.css --watch --debug --config ./wwwroot/js/tailwind.config.js"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",

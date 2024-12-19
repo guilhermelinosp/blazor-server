@@ -3,7 +3,7 @@ using Blazor.Infrastructure;
 using Blazor.Server.Configurations;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.Host.UseSerilog((context, options) =>
     options.ReadFrom.Configuration(context.Configuration));
